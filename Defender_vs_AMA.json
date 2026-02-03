@@ -157,7 +157,7 @@
                             "additionalResourceOptions": [],
                             "showDefault": false
                         },
-                        "jsonData": "[\r\n  {\"label\": \"Yes\", \"value\": \"MDE + AMA\"},\r\n  {\"label\": \"No\",  \"value\": \"\"}\r\n]\r\n",
+                        "jsonData": "[\r\n  {\"label\": \"Yes\", \"value\": \"MDE + AMA\"},\r\n  {\"label\": \"No\",  \"value\": \"All\"}\r\n]\r\n",
                         "value": "MDE + AMA",
                         "key": "882a22bf-b6c4-4f89-af2c-e73fca05e2fe",
                         "isRequired": true
@@ -361,7 +361,6 @@
         ""
     ],
     "fromTemplateId": "sentinel-UserWorkbook",
-    "$schema": "https://github.com/Microsoft/Application-Insights-Workbooks/blob/master/schema/workbook.json",
     "context": {
         "ownerId": ""
     }
