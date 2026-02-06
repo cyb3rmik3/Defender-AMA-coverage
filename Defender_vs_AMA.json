@@ -351,7 +351,8 @@
                         "sortOrder": 1
                     }
                 ],
-                "title": "🖥️ Virtual Machine Inventory with MDE + AMA & DCR Associations Correlation"
+                "title": "🖥️ Virtual Machine Inventory with MDE + AMA & DCR Associations Correlation",
+                "showExportToExcel": true
             },
             "name": "Merge",
             "id": "cc1743ce-bc12-4c0f-8bb2-4f3f4432d76c"
@@ -361,6 +362,7 @@
         ""
     ],
     "fromTemplateId": "sentinel-UserWorkbook",
+    "$schema": "https://github.com/Microsoft/Application-Insights-Workbooks/blob/master/schema/workbook.json",
     "context": {
         "ownerId": ""
     }
