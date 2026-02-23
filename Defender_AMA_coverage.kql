@@ -78,7 +78,6 @@ DeviceInfo
     | join kind=leftouter (
         DeviceInfo
         | where OnboardingStatus != "Onboarded"
-        | where OnboardingStatus == "Onboarded"
         | where DeviceType <> ExcludeWorkstation
         | summarize arg_max(TimeGenerated, OSPlatform, OnboardingStatus) by DeviceName
         | extend DeviceNameLower = tolower(tostring(split(DeviceName, ".")[0]))
