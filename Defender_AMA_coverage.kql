@@ -79,6 +79,7 @@ DeviceInfo
         DeviceInfo
         | where OnboardingStatus != "Onboarded"
         | where DeviceType <> ExcludeWorkstation
+        | where DeviceType <> "Mobile"
         | summarize arg_max(TimeGenerated, OSPlatform, OnboardingStatus) by DeviceName
         | extend DeviceNameLower = tolower(tostring(split(DeviceName, ".")[0]))
         | project DeviceNameLower, DefenderOSPlatform = OSPlatform, DefenderStatus = OnboardingStatus
