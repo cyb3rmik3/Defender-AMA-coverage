@@ -2,17 +2,20 @@
 
 # AMA vs Defender Coverage Workbook
 
-## ⚠️ This workbook assumes Microsoft Defender XDR data is ingested into Sentinel. Without ingestion, device name normalization and correlation may be inconsistent. To workaround that, copy the KQL query from the Github page and run it in Advanced Hunting in the Defender Portal.
+#### ⚠️ This workbook assumes Microsoft Defender XDR data is ingested into Sentinel. Without ingestion, device name normalization and correlation may be inconsistent. To workaround that, copy the KQL query from the Github page and run it in Advanced Hunting in the Defender Portal (https://security.microsoft.com). 
+
+When running the KQL query it does not take into account the actual state of the AMA extension which is part of the Workbook merged view. The reason for this is that the query looks at the Heartbeat table and the actual extention status lookup is a Graph API call. This means that the extention might be installed but not reporting, for example, the machine is turned off and therefor not sending heartbeats to the Heartbeat table.
 
 ## Overview
 
 This Microsoft Sentinel Workbook provides visibility into Microsoft Defender for Endpoint (MDE)–managed devices and their telemetry coverage within Sentinel. It helps security and operations teams verify that devices are properly configured for comprehensive monitoring by checking:
 
 *   **Azure Monitor Agent (AMA)** installation status
-*   **SecurityEvent** log ingestion into Sentinel
+*   **SecurityEvent** log ingestion into Sentinel (Windows)
+*   **Syslog** log ingestion into Sentinel (Linux)
 *   **Last heartbeat and log timestamps** for freshness
 
-By correlating data from **DeviceInfo**, **Heartbeat**, and **SecurityEvent** tables, the workbook identifies configuration gaps and supports remediation efforts.
+By correlating data from **DeviceInfo**, **Heartbeat**, and **SecurityEvent/Syslog** tables, the workbook identifies configuration gaps and supports remediation efforts.
 
 ***
 
@@ -21,7 +24,7 @@ By correlating data from **DeviceInfo**, **Heartbeat**, and **SecurityEvent** ta
 *   **Coverage Analysis**
     Detect devices that:
     *   Are onboarded to MDE but missing AMA
-    *   Are not sending SecurityEvent logs despite being onboarded
+    *   Are not sending SecurityEvent/Syslog logs despite being onboarded
 
 *   **Filtering Options**
     Filter by:
@@ -45,7 +48,7 @@ By correlating data from **DeviceInfo**, **Heartbeat**, and **SecurityEvent** ta
     Displays Data Collection Rules (DCRs) linked to machines for AMA configuration
 
 *   **Merged View**
-    Combines AMA-enabled devices with associated DCRs for full visibility
+    Combines AMA-enabled and/or Defender devices with associated DCRs for full visibility
 
 ***
 
@@ -87,7 +90,7 @@ By correlating data from **DeviceInfo**, **Heartbeat**, and **SecurityEvent** ta
 ## Use Cases
 
 *   Validate AMA deployment across Defender-managed endpoints
-*   Ensure SecurityEvent logs are flowing into Sentinel
+*   Ensure SecurityEvent or Syslog logs are flowing into Sentinel
 *   Identify gaps in telemetry for compliance and security posture
 *   Correlate AMA coverage with DCR assignments for troubleshooting
 
@@ -114,7 +117,6 @@ By correlating data from **DeviceInfo**, **Heartbeat**, and **SecurityEvent** ta
 4.  Save and customize filters as needed
 
 **Advisory:**
-- Set `HasAMA = Yes` for a cleaner merged view
 - Default time range is 7 days (adjustable)
 - Workstations are excluded by default (toggle with **Exclude Workstations** filter)
 - By default, the **Exclude Compliant** filter is set to `MDE + AMA`, which excludes compliant machines so you can focus on remediation. Adjust this filter to include compliant devices if needed.
